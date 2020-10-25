@@ -24,7 +24,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": []
           },
@@ -119,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "dzuko-frontend"
+    }
+  },
+  "defaultProject": "dzuko-frontend",
+  "cli": {
+    "analytics": "669cee1b-1277-463b-bfee-243439ef7808"
+  }
 }

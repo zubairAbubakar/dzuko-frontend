@@ -1,0 +1,33 @@
+<!-- MAIN CONTENT-->
+<div class="main-content">
+    <div class="section-content section-content-p30">
+
+        <h4>Category: {{currentCategoryName}}</h4>
+        <hr>
+        
+        <div class="container-fluid">
+            <div class="row">
+                
+                <!-- Loop over the ads -->
+                <div *ngFor="let ad of ads" class="col-md-3">
+                    <div class="product-box">
+                        <a href="product-detail.html">
+                            <img src="{{ ad.imageUrl }}" class="img-responsive">
+                        </a>
+                        <a href="product-detail.html">
+                            <h5>{{ad.name}}</h5>
+                        </a>
+                        <!--<h2>{{ad.description}}</h2> -->
+                        <div class="price">{{ad.unitPrice | currency:'USD' }}</div>
+                        <a href="#" class="primary-btn">Add to cart</a>
+                    </div>
+                </div>
+
+                <!-- If no ads then display a message -->
+                <div *ngIf="ads?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                    No Ads founds.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
