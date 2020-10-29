@@ -8,9 +8,11 @@ import { AdService } from './services/ad.service';
 import { Routes, RouterModule } from '@angular/router';
 import { AdCategoryMenuComponent } from './components/ad-category-menu/ad-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
+import { AdDetailsComponent } from './components/ad-details/ad-details.component';
 
 
 const routes: Routes = [
+  {path: 'ads/:id', component: AdDetailsComponent},
   {path: 'search/:keyword', component: AdListComponent},
   {path: 'category/:id/:name', component: AdListComponent},
   {path: 'category', component: AdListComponent},
@@ -24,7 +26,8 @@ const routes: Routes = [
     AppComponent,
     AdListComponent,
     AdCategoryMenuComponent,
-    SearchComponent
+    SearchComponent,
+    AdDetailsComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

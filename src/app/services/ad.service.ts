@@ -10,16 +10,36 @@ import { AdCategory } from '../common/ad-category';
 })
 export class AdService {
 
+
   private baseUrl = 'http://localhost:8082/api/ads';
   private categoryUrl = 'http://localhost:8082/api/ad-category';
 
   constructor(private httpClient: HttpClient) { }
 
+
+  /**
+   * This function gets ads by categoryId
+   * @param categoryId 
+   */
   getAdList(categoryId: number): Observable<Ad[]>{
 
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`;
 
     return this.getAds(searchUrl);
+  }
+
+
+  /**
+   * The is function gets a particular ad by Id
+   * @param adId 
+   */
+  getAd(adId: number): Observable<Ad> {
+
+    //build URL based on ad Id
+    const adUrl = `${this.baseUrl}/${adId}`;
+
+    return this.httpClient.get<Ad>(adUrl);
+    
   }
 
 

@@ -1,0 +1,18 @@
+<div class="details-section">
+    <div class="container-fluid">
+        <br/>
+        <img src=" {{ ad.imageUrl }}" class="detail-img"/>
+
+        <h3>{{ ad.name }}</h3>
+        <div class="price"> {{ ad.unitPrice | currency:'USD' }} </div>
+        <a href="#" class="primary-btn"> Add to Cart </a>
+        
+        <hr>
+        <h4>Description</h4>
+        <p>{{ ad.description }}</p>
+
+        <a routeLink="/ads" class="mt5"> Back to ads </a>
+
+    </div>
+    
+</div>

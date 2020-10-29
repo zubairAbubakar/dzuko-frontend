@@ -1,5 +1,6 @@
 export class Ad {
 
+    id: string;
     sku: string;
     name: string;
     description: string;

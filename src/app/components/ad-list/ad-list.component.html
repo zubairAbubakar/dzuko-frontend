@@ -11,12 +11,15 @@
                 <!-- Loop over the ads -->
                 <div *ngFor="let ad of ads" class="col-md-3">
                     <div class="product-box">
-                        <a href="product-detail.html">
+                        
+                        <a routerLink="/ads/{{ ad.id }}">
                             <img src="{{ ad.imageUrl }}" class="img-responsive">
                         </a>
-                        <a href="product-detail.html">
+
+                        <a routerLink="/ads/{{ ad.id }}">
                             <h5>{{ad.name}}</h5>
                         </a>
+                        
                         <!--<h2>{{ad.description}}</h2> -->
                         <div class="price">{{ad.unitPrice | currency:'USD' }}</div>
                         <a href="#" class="primary-btn">Add to cart</a>
