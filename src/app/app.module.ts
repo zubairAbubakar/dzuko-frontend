@@ -10,6 +10,9 @@ import { AdCategoryMenuComponent } from './components/ad-category-menu/ad-catego
 import { SearchComponent } from './components/search/search.component';
 import { AdDetailsComponent } from './components/ad-details/ad-details.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartStatusComponent } from './components/cart-status/cart-status.component';
+
 
 const routes: Routes = [
   {path: 'ads/:id', component: AdDetailsComponent},
@@ -27,12 +30,14 @@ const routes: Routes = [
     AdListComponent,
     AdCategoryMenuComponent,
     SearchComponent,
-    AdDetailsComponent
+    AdDetailsComponent,
+    CartStatusComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   exports: [
     RouterModule

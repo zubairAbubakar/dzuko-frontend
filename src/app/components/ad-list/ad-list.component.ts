@@ -11,9 +11,17 @@ import { AdService } from 'src/app/services/ad.service';
 export class AdListComponent implements OnInit {
 
   ads: Ad[];
-  currentCategoryId: number;
+  currentCategoryId: number = 1;
+  previousCategoryId: number = 1;
   currentCategoryName: string;
-  searchMode: boolean;
+  searchMode: boolean = false;
+
+  //pagination properties
+  pageNumber: number = 1
+  pageSize: number = 5;
+  totalElements: number = 0;
+
+  previousKeyword: string = null;
 
   constructor(private adService: AdService,
               private route: ActivatedRoute) { }
@@ -42,12 +50,22 @@ export class AdListComponent implements OnInit {
 
     const theKeyword = this.route.snapshot.paramMap.get('keyword');
 
+
+    //if there is a different keyword than previous 
+    //then set pageNumber to 1
+    if(this.previousKeyword != theKeyword){
+      
+      this.pageNumber = 1;
+    }
+
+    this.previousKeyword = theKeyword;
+
+    console.log(`Keyword=${theKeyword}, PagaNumber=${this.pageNumber}`);
+
     //get the ads for the entered keyword
-    this.adService.SearchAds(theKeyword).subscribe(
-      data => { 
-        this.ads = data; 
-      }
-    )
+    this.adService.searchPaginatedAdList(this.pageNumber - 1,
+                                         this.pageSize,
+                                         theKeyword).subscribe(this.processResult());
   }
 
   handleListAds(){
@@ -67,11 +85,46 @@ export class AdListComponent implements OnInit {
       this.currentCategoryName = 'Books';
     }
 
+    //check if there is a different category than the previous
+    //Angular will reuse a component if it is currently being viewed
+    //
+    
+    //if there is a different categoryId than previous 
+    //then set pageNumber to 1
+    if(this.previousCategoryId != this.currentCategoryId){
+      
+      this.pageNumber = 1;
+    }
+
+    this.previousCategoryId = this.currentCategoryId;
+
+    console.log(`currentCategoryId=${this.currentCategoryId}, PagaNumber=${this.pageNumber}`);
+
     //get the ads for the given category id
-    this.adService.getAdList(this.currentCategoryId).subscribe(
-      data => { 
-        this.ads = data; 
-      }
-    )
+    this.adService.getPaginatedAdList(this.pageNumber - 1,
+                                      this.pageSize,
+                                      this.currentCategoryId).subscribe(this.processResult());
+
   }
+
+
+  processResult() {
+    
+    return data => {
+      this.ads = data._embedded.ads;
+      this.pageNumber = data.page.number + 1;
+      this.pageSize = data.page.size;
+      this.totalElements = data.page.totalElements;
+    };
+
+  }
+
+
+  updatePageSize(pageSize: number){
+    
+    this.pageSize = pageSize;
+    this.pageNumber = 1;
+    this.listAds();
+  }
+
 }

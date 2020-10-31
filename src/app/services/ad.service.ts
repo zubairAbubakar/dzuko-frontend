@@ -29,6 +29,36 @@ export class AdService {
   }
 
 
+
+  getPaginatedAdList(page: number,
+                    pageSize: number,
+                    categoryId: number): Observable<GetAdResponse>{
+
+    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${categoryId}`
+                    + `&page=${page}&size=${pageSize}`;
+
+    return this.httpClient.get<GetAdResponse>(searchUrl);
+  }
+
+
+  /**
+   * 
+   * @param page 
+   * @param pageSize 
+   * @param keyword 
+   */
+  searchPaginatedAdList(page: number,
+                        pageSize: number,
+                        keyword: string): Observable<GetAdResponse>{
+
+    const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${keyword}`
+                    + `&page=${page}&size=${pageSize}`;
+
+    return this.httpClient.get<GetAdResponse>(searchUrl);
+  }
+
+
+
   /**
    * The is function gets a particular ad by Id
    * @param adId 
@@ -70,6 +100,12 @@ export class AdService {
 interface GetAdResponse {
   _embedded: {
     ads: Ad[];
+  }
+  page: {
+    size: number,
+    totalElements: number,
+    totalPages: number,
+    number: number
   }
 }
 
