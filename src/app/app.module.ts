@@ -12,9 +12,11 @@ import { AdDetailsComponent } from './components/ad-details/ad-details.component
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 
 
 const routes: Routes = [
+  {path: 'cart-details', component: CartDetailsComponent},
   {path: 'ads/:id', component: AdDetailsComponent},
   {path: 'search/:keyword', component: AdListComponent},
   {path: 'category/:id/:name', component: AdListComponent},
@@ -31,7 +33,8 @@ const routes: Routes = [
     AdCategoryMenuComponent,
     SearchComponent,
     AdDetailsComponent,
-    CartStatusComponent
+    CartStatusComponent,
+    CartDetailsComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
