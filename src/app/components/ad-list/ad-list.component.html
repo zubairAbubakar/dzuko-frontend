@@ -22,7 +22,7 @@
                         
                         <!--<h2>{{ad.description}}</h2> -->
                         <div class="price">{{ad.unitPrice | currency:'USD' }}</div>
-                        <a href="#" class="primary-btn">Add to cart</a>
+                        <button (click)="addToCart(ad)" class="btn btn-primary btn-sm">Add to cart</button>
                     </div>
                 </div>
 

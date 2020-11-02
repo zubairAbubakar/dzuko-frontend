@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Ad } from 'src/app/common/ad';
+import { CartItem } from 'src/app/common/cart-item';
+import { CartService } from 'src/app/service/cart.service';
 import { AdService } from 'src/app/services/ad.service';
 
 @Component({
@@ -24,6 +26,7 @@ export class AdListComponent implements OnInit {
   previousKeyword: string = null;
 
   constructor(private adService: AdService,
+              private cartService: CartService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -125,6 +128,19 @@ export class AdListComponent implements OnInit {
     this.pageSize = pageSize;
     this.pageNumber = 1;
     this.listAds();
+  }
+
+  /**
+   * 
+   * @param ad The ad to be added to cart
+   */
+  addToCart(ad: Ad){
+    
+    console.log(`Adding to cart: ${ad.name}, ${ad.unitPrice}`);
+
+    const cartItem = new CartItem(ad);
+    
+    this.cartService.addToCart(cartItem);
   }
 
 }
