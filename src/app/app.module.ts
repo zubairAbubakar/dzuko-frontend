@@ -13,9 +13,12 @@ import { AdDetailsComponent } from './components/ad-details/ad-details.component
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
+  {path: 'checkout', component: CheckoutComponent},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'ads/:id', component: AdDetailsComponent},
   {path: 'search/:keyword', component: AdListComponent},
@@ -34,16 +37,15 @@ const routes: Routes = [
     SearchComponent,
     AdDetailsComponent,
     CartStatusComponent,
-    CartDetailsComponent
+    CartDetailsComponent,
+    CheckoutComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule,
-    NgbModule
-  ],
-  exports: [
-    RouterModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [AdService],
   bootstrap: [AppComponent]
